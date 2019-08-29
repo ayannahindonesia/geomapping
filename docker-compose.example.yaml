@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  geomapping:
+    build: .
+    ports:
+      - 8001:8001
+    image: geomapping:development
+    volumes:
+      - ./:/go/src/geomapping
+    hostname: localhost
+    environment:
+      - APPNAME=geomapping
+      - ENV=dev
+    container_name: geomapping
+  postgres_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: asirauser
+      POSTGRES_PASSWORD: asirapass
+      POSTGRES_DB: asira_db
+    ports:
+      - 5432:5432
+    container_name: postgres_db
+    networks: 
+      - asira_net
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8010:8080
+    container_name: asira_adminer
+    hostname: "adminer.local"
+
+  portainer:
+    image: portainer/portainer
+    container_name: "portainer"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -H unix:///var/run/docker.sock --no-auth
+    ports:
+      - 9000:9000
+
+networks:
+  default:
+    external:
+      name: asira_net
