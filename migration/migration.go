@@ -2,8 +2,8 @@ package migration
 
 import (
 	"fmt"
-	"geomapping/asira"
-	"geomapping/models"
+	"asira_geomapping/asira"
+	"asira_geomapping/models"
 	"strings"
 )
 

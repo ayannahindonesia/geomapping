@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"geomapping/asira"
+	"asira_geomapping/asira"
 	"fmt"
 	"time"
 

@@ -1,8 +1,8 @@
 package models
 
 import (
+	"asira_geomapping/asira"
 	"fmt"
-	"geomapping/asira"
 	"math"
 	"reflect"
 	"strings"

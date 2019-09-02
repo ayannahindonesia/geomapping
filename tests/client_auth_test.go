@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"geomapping/router"
+	"asira_geomapping/router"
 	"net/http"
 	"net/http/httptest"
 	"testing"
