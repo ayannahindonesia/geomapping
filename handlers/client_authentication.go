@@ -27,7 +27,7 @@ func ClientLogin(c echo.Context) error {
 			"expires_in": expiration.Seconds(),
 		})
 	}
-	if authtoken := strings.TrimPrefix(c.Request().Header.Get("Authorization"), "Basic "); authtoken == clientConf["react"].(string) {
+	if authtoken := strings.TrimPrefix(c.Request().Header.Get("Authorization"), "Basic "); authtoken == clientConf["client"].(string) {
 		token, err := createJwtToken("geo", "client")
 		if err != nil {
 			return returnInvalidResponse(http.StatusInternalServerError, "", fmt.Sprint(err))

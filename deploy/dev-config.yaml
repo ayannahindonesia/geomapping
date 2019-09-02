@@ -13,8 +13,8 @@ development:
     logmode: true
     timezone: Asia/Jakarta
   clients:
-    admin: YWRtaW46YWRtaW5rZXk=
-    react: Y2xpZW50OmNsaWVudGdlbw== # client:clientgeo
+    admin: YWRtaW46YWRtaW5rZXk= #admin:adminkey
+    client: Y2xpZW50OmNsaWVudGdlbw== # client:clientgeo
   jwt:
     duration: 10080 # in minutes
     jwt_secret: sXQ8jUMpueOvN5P3cdCR

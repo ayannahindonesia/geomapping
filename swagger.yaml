@@ -57,36 +57,6 @@ paths:
       summary: get Province list
       parameters:
         - $ref: '#/components/parameters/authtoken'
-        - in: query
-          name: rows
-          schema:
-            type: integer
-            example: 2
-          description: how many data shown in one page
-        - in: query
-          name: page
-          schema:
-            type: string
-            example: 1
-          description: current open page
-        - in: query
-          name: orderby
-          schema:
-            type: string
-            example: id
-          description: order by
-        - in: query
-          name: sort
-          schema:
-            type: string
-            example: "asc"
-          description: sort ascending or descending
-        - in: query
-          name: name
-          schema:
-            type: string
-            example: Jakarta
-          description: search by name
       responses:
         '200':
           description: OK
@@ -139,36 +109,6 @@ paths:
       summary: get list of city from provinsi id
       parameters:
         - $ref: '#/components/parameters/authtoken'
-        - in: query
-          name: rows
-          schema:
-            type: integer
-            example: 2
-          description: how many data shown in one page
-        - in: query
-          name: page
-          schema:
-            type: string
-            example: 1
-          description: current open page
-        - in: query
-          name: orderby
-          schema:
-            type: string
-            example: id
-          description: order by
-        - in: query
-          name: sort
-          schema:
-            type: string
-            example: "asc"
-          description: sort ascending or descending
-        - in: query
-          name: name
-          schema:
-            type: string
-            example: Jakarta
-          description: search by name
       responses:
         '200':
           description: OK
@@ -221,36 +161,6 @@ paths:
       summary: get list of kecamatan from kota id
       parameters:
         - $ref: '#/components/parameters/authtoken'
-        - in: query
-          name: rows
-          schema:
-            type: integer
-            example: 2
-          description: how many data shown in one page
-        - in: query
-          name: page
-          schema:
-            type: string
-            example: 1
-          description: current open page
-        - in: query
-          name: orderby
-          schema:
-            type: string
-            example: id
-          description: order by
-        - in: query
-          name: sort
-          schema:
-            type: string
-            example: "asc"
-          description: sort ascending or descending
-        - in: query
-          name: name
-          schema:
-            type: string
-            example: Jakarta
-          description: search by name
       responses:
         '200':
           description: OK
@@ -303,36 +213,6 @@ paths:
       summary: get list of kelurahan from kecamatan id
       parameters:
         - $ref: '#/components/parameters/authtoken'
-        - in: query
-          name: rows
-          schema:
-            type: integer
-            example: 2
-          description: how many data shown in one page
-        - in: query
-          name: page
-          schema:
-            type: string
-            example: 1
-          description: current open page
-        - in: query
-          name: orderby
-          schema:
-            type: string
-            example: id
-          description: order by
-        - in: query
-          name: sort
-          schema:
-            type: string
-            example: "asc"
-          description: sort ascending or descending
-        - in: query
-          name: name
-          schema:
-            type: string
-            example: Jakarta
-          description: search by name
       responses:
         '200':
           description: OK
@@ -505,7 +385,7 @@ paths:
   /admin/provinsi/[provinsi_id]:
     get:
       tags:
-        - Client
+        - Admin
       summary: get provinsi detail info by id
       parameters:
         - $ref: '#/components/parameters/authtoken'
@@ -1082,8 +962,11 @@ paths:
                 example: {"message":"Prabumulih Selatan is deleted"}             
 # Added by API Auto Mocking Plugin
 servers:
+# Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/ayannahindonesia/gemapping/0.0.1
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/ayannahindonesia/geomapping/0.0.1
 components:
   schemas:
     jwtResponse:
@@ -1112,24 +995,9 @@ components:
     provinsiList:
       type: object
       properties:
-        total_data:
-          type: number
-          example: 3
-        rows:
-          type: number
-          example: 5
-        current_page:
-         type: number
-         example: 1
-        last_page:
-         type: number
-         example: 1
-        from:
-         type: number
-         example: 1
-        to:
-         type: number
-         example: 3
+        status:
+         type: boolean
+         example: true
         data:
           type: array
           items:
@@ -1154,24 +1022,9 @@ components:
     kotaList:
       type: object
       properties:
-        total_data:
-          type: number
-          example: 3
-        rows:
-          type: number
-          example: 5
-        current_page:
-         type: number
-         example: 1
-        last_page:
-         type: number
-         example: 1
-        from:
-         type: number
-         example: 1
-        to:
-         type: number
-         example: 3
+        status:
+         type: boolean
+         example: true
         data:
           type: array
           items:
@@ -1179,6 +1032,7 @@ components:
     kotaDetails:
       required:
         - name
+        - provinsi_id
       properties:
         id:
           type: number
@@ -1188,7 +1042,7 @@ components:
           example: 1
         type:
           type: string
-          example: Kota Madya
+          example: Kota
         name:
           type: string
           example: Palembang
@@ -1202,24 +1056,9 @@ components:
     kecamatanList:
       type: object
       properties:
-        total_data:
-          type: number
-          example: 3
-        rows:
-          type: number
-          example: 5
-        current_page:
-         type: number
-         example: 1
-        last_page:
-         type: number
-         example: 1
-        from:
-         type: number
-         example: 1
-        to:
-         type: number
-         example: 3
+        status:
+         type: boolean
+         example: true
         data:
           type: array
           items:
@@ -1247,24 +1086,9 @@ components:
     kelurahanList:
       type: object
       properties:
-        total_data:
-          type: number
-          example: 3
-        rows:
-          type: number
-          example: 5
-        current_page:
-         type: number
-         example: 1
-        last_page:
-         type: number
-         example: 1
-        from:
-         type: number
-         example: 1
-        to:
-         type: number
-         example: 3
+        status:
+         type: boolean
+         example: true
         data:
           type: array
           items:

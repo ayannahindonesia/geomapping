@@ -1,12 +1,12 @@
 package main
 
 import (
-	"geomapping/asira"
-	"geomapping/migration"
-	"geomapping/router"
 	"database/sql"
 	"flag"
 	"fmt"
+	"geomapping/asira"
+	"geomapping/migration"
+	"geomapping/router"
 	"log"
 	"os"
 
@@ -40,7 +40,7 @@ func main() {
 				AllowHeaders: []string{"*"},
 			}))
 		}
-		e.Logger.Fatal(e.Start(":8001"))
+		e.Logger.Fatal(e.Start(":8002"))
 		os.Exit(0)
 		break
 	case "seed":
@@ -112,7 +112,7 @@ database seeding : (development environment only)
 
 database truncate : (development environment only)
 	[app_name] truncate [table(s)]
-	example : asira truncate borrowers | asira truncate borrowers loans | asira truncate all
+	example : asira truncate all
 	replace [table] with 'all' to truncate all tables
 	`
 
