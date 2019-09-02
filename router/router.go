@@ -19,7 +19,6 @@ func NewRouter() *echo.Echo {
 	// e.GET("/test", handlers.Test)
 	e.GET("/clientauth", handlers.ClientLogin)
 
-	groups.AdminGroup(e)
 	groups.ClientGroup(e)
 
 	return e
