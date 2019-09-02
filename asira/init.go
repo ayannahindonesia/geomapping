@@ -1,8 +1,8 @@
 package asira
 
 import (
-	"fmt"
 	"asira_geomapping/validator"
+	"fmt"
 	"log"
 	"os"
 	"strings"

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"database/sql"
-	"flag"
-	"fmt"
 	"asira_geomapping/asira"
 	"asira_geomapping/migration"
 	"asira_geomapping/router"
+	"database/sql"
+	"flag"
+	"fmt"
 	"log"
 	"os"
 
