@@ -1,8 +1,8 @@
 package router
 
 import (
-	"geomapping/groups"
-	"geomapping/handlers"
+	"asira_geomapping/groups"
+	"asira_geomapping/handlers"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -11,9 +11,9 @@ import (
 func NewRouter() *echo.Echo {
 	e := echo.New()
 
-	// ignore /api-geomapping
+	// ignore /api-asira_geomapping
 	e.Pre(middleware.Rewrite(map[string]string{
-		"/geomapping/*": "/$1",
+		"/asira_geomapping/*": "/$1",
 	}))
 
 	// e.GET("/test", handlers.Test)

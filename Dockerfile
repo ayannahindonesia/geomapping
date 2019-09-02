@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-ARG APPNAME="geomapping"
+ARG APPNAME="asira_geomapping"
 ARG ENV="dev"
 
 ADD . $GOPATH/src/"${APPNAME}"

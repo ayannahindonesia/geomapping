@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"flag"
 	"fmt"
-	"geomapping/asira"
-	"geomapping/migration"
-	"geomapping/router"
+	"asira_geomapping/asira"
+	"asira_geomapping/migration"
+	"asira_geomapping/router"
 	"log"
 	"os"
 

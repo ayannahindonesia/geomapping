@@ -2,8 +2,8 @@ package tests
 
 import (
 	"fmt"
-	"geomapping/asira"
-	"geomapping/migration"
+	"asira_geomapping/asira"
+	"asira_geomapping/migration"
 	"net/http"
 	"os"
 

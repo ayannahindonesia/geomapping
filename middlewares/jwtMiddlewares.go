@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"fmt"
-	"geomapping/asira"
+	"asira_geomapping/asira"
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
