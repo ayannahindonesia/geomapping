@@ -84,24 +84,6 @@ func (a *AsiraValidator) CustomValidatorRules() {
 		return nil
 	})
 
-	// validator for loans
-	govalidator.AddCustomRule("loan_statuses", func(field string, rule string, message string, value interface{}) error {
-		val := value.(string)
-		if val != "approved" && val != "rejected" && val != "processing" {
-			return fmt.Errorf("The %s field must be contain either: approved, rejected, or processing", field)
-		}
-		return nil
-	})
-
-	// validator for otp entity types
-	govalidator.AddCustomRule("otp_entity_types", func(field string, rule string, message string, value interface{}) error {
-		val := value.(string)
-		if val != "loan" && val != "borrower" {
-			return fmt.Errorf("The %s field must be contain either: loan or borrower", field)
-		}
-		return nil
-	})
-
 	// validator for indonesia phone number
 	govalidator.AddCustomRule("id_phonenumber", func(field string, rule string, message string, value interface{}) error {
 		reg := regexp.MustCompile(`\+?([ -]?\d+)+|\(\d+\)([ -]\d+)`)
