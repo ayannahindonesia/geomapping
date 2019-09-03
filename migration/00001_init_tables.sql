@@ -42,9 +42,20 @@ CREATE TABLE "villages" (
     PRIMARY KEY ("id")
 ) WITH (OIDS = FALSE);
 
+CREATE TABLE "client_configs" (
+    "id" bigserial,
+    "name" varchar(255) NOT NULL,
+    "key" varchar(255) NOT NULL,
+    "secret" varchar(255) NOT NULL,
+    "role" varchar(255) NOT NULL,
+    "created_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "updated_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ("id")
+) WITH (OIDS = FALSE);
 -- +goose Down
 -- SQL in this section is executed when the migration is rolled back.
 DROP TABLE IF EXISTS "villages" CASCADE;
 DROP TABLE IF EXISTS "districts" CASCADE;
 DROP TABLE IF EXISTS "cities" CASCADE;
 DROP TABLE IF EXISTS "provinces" CASCADE;
+DROP TABLE IF EXISTS "client_configs" CASCADE;
