@@ -31,7 +31,7 @@ func ClientProvinceDetails(c echo.Context) error {
 	ProvinceID, _ := strconv.Atoi(c.Param("provinsi_id"))
 	provinces := models.Province{}
 
-	result, err := provinces.FindByID(ProvinceID)
+	result, err := provinces.FindbyID(ProvinceID)
 	if err != nil {
 		return returnInvalidResponse(http.StatusNotFound, err, "data tidak ditemukan")
 	}
