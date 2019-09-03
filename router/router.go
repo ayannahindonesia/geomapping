@@ -13,7 +13,7 @@ func NewRouter() *echo.Echo {
 
 	// ignore /api-asira_geomapping
 	e.Pre(middleware.Rewrite(map[string]string{
-		"/asira-geomapping/*": "/$1",
+		"/api-geomapping/*": "/$1",
 	}))
 
 	// e.GET("/test", handlers.Test)
