@@ -22,7 +22,7 @@ func ClientDistricts(c echo.Context) error {
 		CityID: CityID,
 	})
 	if err != nil {
-		return returnInvalidResponse(http.StatusInternalServerError, err, "pencarian tidak ditemukan")
+		return returnInvalidResponse(http.StatusNotFound, err, "pencarian tidak ditemukan")
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -39,7 +39,7 @@ func ClientDistrictDetails(c echo.Context) error {
 
 	result, err := district.FindbyID(DistrictID)
 	if err != nil {
-		return returnInvalidResponse(http.StatusInternalServerError, err, "data tidak ditemukan")
+		return returnInvalidResponse(http.StatusNotFound, err, "data tidak ditemukan")
 	}
 
 	return c.JSON(http.StatusOK, result)
