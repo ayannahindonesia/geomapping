@@ -9,7 +9,7 @@ import (
 	"github.com/gavv/httpexpect"
 )
 
-func TestClientProvince(t *testing.T) {
+func TestClientCity(t *testing.T) {
 	api := router.NewRouter()
 
 	server := httptest.NewServer(api)
