@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-ARG APPNAME="geomapping"
+ARG APPNAME="asira_geomapping"
 ARG ENV="dev"
 
 ADD . $GOPATH/src/"${APPNAME}"
@@ -25,4 +25,4 @@ CMD if [ "${ENV}" = "dev" ] ; then \
     fi \
     && go test tests/*_test.go -failfast -v ;
 
-EXPOSE 8000
+EXPOSE 8002

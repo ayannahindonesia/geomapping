@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"fmt"
-	"geomapping/asira"
+	"asira_geomapping/asira"
 	"net/http"
 	"strings"
 	"time"

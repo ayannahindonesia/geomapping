@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"geomapping/asira"
+	"asira_geomapping/asira"
 	"net/http"
 
 	"github.com/labstack/echo"

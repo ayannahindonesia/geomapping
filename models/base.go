@@ -1,7 +1,7 @@
 package models
 
 import (
-	"geomapping/asira"
+	"asira_geomapping/asira"
 	"fmt"
 	"math"
 	"reflect"
@@ -189,4 +189,27 @@ func PagedFilterSearch(i interface{}, page int, rows int, orderby string, sort s
 	}
 
 	return result, err
+}
+
+func GetAll(i interface{}, filter interface{}) (data interface{}, err error) {
+
+	db := asira.App.DB
+
+	// filtering
+	refFilter := reflect.ValueOf(filter).Elem()
+	refType := refFilter.Type()
+	for x := 0; x < refFilter.NumField(); x++ {
+		field := refFilter.Field(x)
+		if field.Interface() != "" {
+			switch refType.Field(x).Tag.Get("condition") {
+			default:
+				db = db.Where(fmt.Sprintf("%s = ?", refType.Field(x).Tag.Get("json")), field.Interface())
+			case "LIKE":
+				db = db.Where(fmt.Sprintf("%s %s ?", refType.Field(x).Tag.Get("json"), refType.Field(x).Tag.Get("condition")), "%"+field.Interface().(string)+"%")
+			}
+		}
+	}
+
+	db.Find(i)
+	return i, err
 }

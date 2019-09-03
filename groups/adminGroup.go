@@ -1,8 +1,8 @@
 package groups
 
 import (
-	"geomapping/handlers"
-	"geomapping/middlewares"
+	"asira_geomapping/handlers"
+	"asira_geomapping/middlewares"
 
 	"github.com/labstack/echo"
 )
