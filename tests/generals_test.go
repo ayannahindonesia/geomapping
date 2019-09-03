@@ -1,9 +1,9 @@
 package tests
 
 import (
-	"fmt"
 	"asira_geomapping/asira"
 	"asira_geomapping/migration"
+	"fmt"
 	"net/http"
 	"os"
 
@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	clientBasicToken string = "cmVhY3RrZXk6cmVhY3RwYXNz"
-	adminBasicToken  string = "Z3JhZGlvczp1bHRpbXVz"
+	clientBasicToken string = "Y2xpZW50OmNsaWVudGdlbw=="
+	adminBasicToken  string = "YWRtaW46YWRtaW5rZXk="
 )
 
 func init() {
