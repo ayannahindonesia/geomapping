@@ -1,9 +1,9 @@
 package migration
 
 import (
-	"fmt"
 	"asira_geomapping/asira"
 	"asira_geomapping/models"
+	"fmt"
 	"strings"
 )
 
@@ -99,6 +99,24 @@ func Seed() {
 		}
 		for _, kel := range village {
 			kel.Create()
+		}
+
+		client := []models.Client_config{
+			models.Client_config{
+				Name:   "admin",
+				Key:    "admin",
+				Role:   "admin",
+				Secret: "adminkey",
+			},
+			models.Client_config{
+				Name:   "client",
+				Key:    "client",
+				Role:   "client",
+				Secret: "clientgeo",
+			},
+		}
+		for _, clients := range client {
+			clients.Create()
 		}
 	}
 }
