@@ -13,5 +13,7 @@ func AdminGroup(e *echo.Echo) {
 
 	// config info
 	g.GET("/info", handlers.AsiraAppInfo)
+	// upload csv
+	g.POST("/upload", handlers.AdminUpload)
 
 }
