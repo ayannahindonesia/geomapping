@@ -13,5 +13,7 @@ func AdminGroup(e *echo.Echo) {
 
 	// config info
 	g.GET("/info", handlers.AsiraAppInfo)
+	//Create Client Config
+	g.POST("/client_config", handlers.CreateClientConfig)
 
 }
