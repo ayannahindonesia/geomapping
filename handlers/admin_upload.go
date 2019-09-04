@@ -11,9 +11,11 @@ import (
 )
 
 func AdminUpload(c echo.Context) error {
+	defer c.Request().Body.Close()
+
 	file, err := c.FormFile("file")
 	if err != nil {
-		return c.JSON(http.StatusOK, err)
+		return c.JSON(http.StatusInternalServerError, err)
 	}
 	src, err := file.Open()
 	if err != nil {
@@ -33,7 +35,6 @@ func AdminUpload(c echo.Context) error {
 		return returnInvalidResponse(http.StatusInternalServerError, "", fmt.Sprint(err))
 	}
 
-	//read csv
 	// Open the file
 	csvfile, err := os.Open("uploads/file.csv")
 	if err != nil {
