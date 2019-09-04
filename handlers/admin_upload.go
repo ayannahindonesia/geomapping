@@ -1,11 +1,13 @@
 package handlers
 
 import (
+	"asira_geomapping/models"
 	"encoding/csv"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/labstack/echo"
 )
@@ -50,12 +52,65 @@ func AdminUpload(c echo.Context) error {
 		// Read each record from csv
 		record, err := r.Read()
 		if err == io.EOF {
-			return c.JSON(http.StatusForbidden, err)
+			return c.JSON(http.StatusOK, map[string]interface{}{
+				"status":  true,
+				"message": "Data Berhasil Di input",
+			})
 		}
+
+		type Filter struct {
+			Name string `json:"name"`
+		}
+
+		//provinsi
+		prov := models.Province{}
+		_, err = prov.FilterSearchSingle(&Filter{
+			Name: record[7],
+		})
 		if err != nil {
-			return c.JSON(http.StatusForbidden, err)
+			prov.Name = record[7]
+			prov.Create()
+		}
+
+		//Kota
+		city := models.City{}
+		_, err = city.FilterSearchSingle(&Filter{
+			Name: record[6],
+		})
+		if err != nil {
+			city.Name = record[6]
+			city.ProvinceID = int(prov.BaseModel.ID)
+			city.Type = record[5]
+			city.Create()
+		}
+
+		//Kecamatan
+		district := models.District{}
+		_, err = district.FilterSearchSingle(&Filter{
+			Name: record[4],
+		})
+		if err != nil {
+			district.Name = record[4]
+			district.CityID = int(city.BaseModel.ID)
+			district.Create()
+		}
+
+		//Kelurahan
+		village := models.Village{}
+		_, err = village.FilterSearchSingle(&Filter{
+			Name: record[2],
+		})
+		if err != nil {
+			village.Name = record[4]
+			village.ZipCode, _ = strconv.Atoi(record[1])
+			village.AreaCode = record[3]
+			village.DistrictID = int(district.BaseModel.ID)
+			village.Create()
 		}
 	}
 
-	return c.JSON(http.StatusOK, r)
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"status":  true,
+		"message": "Data Berhasil Di input",
+	})
 }

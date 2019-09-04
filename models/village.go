@@ -43,3 +43,8 @@ func (p *Village) GetAll(filter interface{}) (result interface{}, err error) {
 
 	return result, err
 }
+
+func (p *Village) FilterSearchSingle(filter interface{}) (*Village, error) {
+	err := FilterSearchSingle(&p, filter)
+	return p, err
+}
