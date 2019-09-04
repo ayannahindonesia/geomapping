@@ -105,7 +105,7 @@ func AdminUpload(c echo.Context) error {
 			Name: record[2],
 		})
 		if err != nil {
-			village.Name = record[4]
+			village.Name = record[2]
 			village.ZipCode, _ = strconv.Atoi(record[1])
 			village.AreaCode = record[3]
 			village.DistrictID = int(district.BaseModel.ID)
