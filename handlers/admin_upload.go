@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/labstack/echo"
 )
@@ -46,9 +47,12 @@ func AdminUpload(c echo.Context) error {
 	// Parse the file
 	r := csv.NewReader(csvfile)
 	//r := csv.NewReader(bufio.NewReader(csvfile))
-
+	i := 0
 	// Iterate through the records
 	for {
+		if i%100 == 0 {
+			time.Sleep(2 * time.Second)
+		}
 		// Read each record from csv
 		record, err := r.Read()
 		if err == io.EOF {
@@ -107,6 +111,7 @@ func AdminUpload(c echo.Context) error {
 			village.DistrictID = int(district.BaseModel.ID)
 			village.Create()
 		}
+		i++
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
