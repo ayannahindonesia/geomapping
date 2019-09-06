@@ -154,7 +154,7 @@ paths:
                 type: object
                 allOf:
                   - $ref: '#/components/schemas/ErrorResponse'
-  /client/kota/[kota_id]/kecamatan:
+  /client/provinsi/kota/[kota_id]/kecamatan:
     get:
       tags:
         - Client
@@ -206,7 +206,7 @@ paths:
                 type: object
                 allOf:
                   - $ref: '#/components/schemas/ErrorResponse'
-  /client/kecamatan/[kecamatan_id]/kelurahan:
+  /client/provinsi/kota/kecamatan/[kecamatan_id]/kelurahan:
     get:
       tags:
         - Client
@@ -259,7 +259,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/ErrorResponse'
 #Admin Endpoint
-  /admin/csvupload:
+  /admin/upload:
     post:
       tags:
         - Admin
@@ -272,7 +272,7 @@ paths:
             schema:
               type: object
               properties:
-                fileName:
+                file:
                   type: string
                   format: csv
       responses:
@@ -960,13 +960,68 @@ paths:
               schema:
                 type: object
                 example: {"message":"Prabumulih Selatan is deleted"}             
+  /admin/client_config:
+    post:
+      tags:
+        - Admin
+      summary: Create New Client Config
+      parameters:
+        - $ref: '#/components/parameters/authtoken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type : object
+              properties:
+                name :
+                  type : string
+                  example : android_client
+                key :
+                  type : string
+                  example : androkey
+                role :
+                  type : string
+                  example : client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name :
+                    type : string
+                    example : android_client
+                  key :
+                    type : string
+                    example : androkey
+                  role :
+                    type : string
+                    example : client
+                  secret:
+                    type: string
+                    example: 1a50b5da-a3a4-4e49-ba87-4c34195748a9
+                  
+        '422':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+  
 # Added by API Auto Mocking Plugin
 servers:
 # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/ayannahindonesia/gemapping/0.0.1
+# Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/ayannahindonesia/geomapping/0.0.1
+  - description: Indonesia Asira dev Geomapping
+    url: http://asira.ayannah.com/api-geomapping
+  - description: Indonesia Asira staging Geomapping
+    url: https://staging-indo.asira.com/v1
 components:
   schemas:
     jwtResponse:
