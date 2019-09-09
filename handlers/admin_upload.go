@@ -50,7 +50,7 @@ func AdminUpload(c echo.Context) error {
 	i := 0
 	// Iterate through the records
 	for {
-		if i%100 == 0 {
+		if i%50 == 0 {
 			time.Sleep(2 * time.Second)
 		}
 		// Read each record from csv
