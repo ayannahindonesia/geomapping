@@ -112,7 +112,7 @@ database seeding : (development environment only)
 
 database truncate : (development environment only)
 	[app_name] truncate [table(s)]
-	example : asira truncate borrowers | asira truncate borrowers loans | asira truncate all
+	example : asira truncate all
 	replace [table] with 'all' to truncate all tables
 	`
 
