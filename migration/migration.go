@@ -130,6 +130,7 @@ func Truncate(tableList []string) (err error) {
 				"districts",
 				"cities",
 				"provinces",
+				"client_configs",
 			}
 		}
 
