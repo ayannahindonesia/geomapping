@@ -42,3 +42,8 @@ func (k *City) GetAll(filter interface{}) (result interface{}, err error) {
 
 	return result, err
 }
+
+func (k *City) FilterSearchSingle(filter interface{}) (*City, error) {
+	err := FilterSearchSingle(&k, filter)
+	return k, err
+}

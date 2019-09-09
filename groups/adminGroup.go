@@ -15,5 +15,7 @@ func AdminGroup(e *echo.Echo) {
 	g.GET("/info", handlers.AsiraAppInfo)
 	//Create Client Config
 	g.POST("/client_config", handlers.CreateClientConfig)
+	// upload csv
+	g.POST("/upload", handlers.AdminUpload)
 
 }

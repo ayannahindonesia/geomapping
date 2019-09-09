@@ -41,3 +41,8 @@ func (p *District) GetAll(filter interface{}) (result interface{}, err error) {
 
 	return result, err
 }
+
+func (p *District) FilterSearchSingle(filter interface{}) (*District, error) {
+	err := FilterSearchSingle(&p, filter)
+	return p, err
+}
