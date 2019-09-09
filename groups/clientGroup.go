@@ -17,4 +17,6 @@ func ClientGroup(e *echo.Echo) {
 	g.GET("/kota/:kota_id", handlers.ClientCityDetails)
 	g.GET("/provinsi/kota/:kota_id/kecamatan", handlers.ClientDistricts)
 	g.GET("/kecamatan/:kecamatan_id", handlers.ClientDistrictDetails)
+	g.GET("/provinsi/kota/kecamatan/:kecamatan_id/kelurahan", handlers.ClientVillages)
+	g.GET("/kelurahan/:kelurahan_id", handlers.ClientVillageDetails)
 }
