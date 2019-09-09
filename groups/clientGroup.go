@@ -15,5 +15,6 @@ func ClientGroup(e *echo.Echo) {
 	g.GET("/provinsi/:provinsi_id", handlers.ClientProvinceDetails)
 	g.GET("/provinsi/:provinsi_id/kota", handlers.ClientCities)
 	g.GET("/kota/:kota_id", handlers.ClientCityDetails)
-
+	g.GET("/provinsi/kota/:kota_id/kecamatan", handlers.ClientDistricts)
+	g.GET("/kecamatan/:kecamatan_id", handlers.ClientDistrictDetails)
 }
