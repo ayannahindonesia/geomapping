@@ -15,7 +15,7 @@ RUN apk --no-cache add curl
 RUN go get -u github.com/golang/dep/cmd/dep
 
 RUN cd $GOPATH/src/"${APPNAME}"
-RUN cp deploy/conf.yaml config.yaml
+RUN cp deploy/dev-config.yaml config.yaml
 RUN dep ensure -v
 RUN go build -v -o "${APPNAME}-res"
 
