@@ -28,7 +28,7 @@ FROM alpine
 
 WORKDIR /go/src/
 COPY --from=build-env /go/src/asira_geomapping/asira_lender-res /go/src/asira_geomapping
-COPY --from=build-env /go/src/asira_geomapping/deploy/conf.yaml /go/src/config.yaml
+COPY --from=build-env /go/src/asira_geomapping/deploy/dev-config.yaml /go/src/config.yaml
 COPY --from=build-env /go/src/asira_geomapping/permissions.yaml /go/src/permissions.yaml
 
 RUN pwd
