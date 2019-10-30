@@ -4,7 +4,7 @@ staging:
     table: asira_geomapping
     username: asirauser
     password: asirapass
-    host: "176.30.46.32"
+    host: "176.30.207.209"
     port: "5432"
     maxlifetime: 30
     idle_conns: 10
