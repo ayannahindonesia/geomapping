@@ -32,6 +32,9 @@ COPY --from=build-env /go/src/asira_geomapping/deploy/dev-config.yaml /go/src/co
 COPY --from=build-env /go/src/asira_geomapping/permissions.yaml /go/src/permissions.yaml
 COPY --from=build-env /go/src/asira_geomapping/uploads /go/src/uploads/
 
+RUN chmod 775 uploads
+RUN chmod 775 uploads/file.csv
+
 RUN pwd
 #ENTRYPOINT /app/asira_lender-res
 CMD ["/go/src/asira_geomapping","run"]
