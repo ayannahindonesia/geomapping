@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"asira_geomapping/asira"
-	"asira_geomapping/models"
 	"encoding/base64"
 	"fmt"
+	"geomapping/geomapping"
+	"geomapping/models"
 	"net/http"
 	"strings"
 	"time"
@@ -41,7 +41,7 @@ func ClientLogin(c echo.Context) error {
 		return returnInvalidResponse(http.StatusInternalServerError, "", fmt.Sprint(err))
 	}
 
-	jwtConf := asira.App.Config.GetStringMap(fmt.Sprintf("%s.jwt", asira.App.ENV))
+	jwtConf := geomapping.App.Config.GetStringMap(fmt.Sprintf("%s.jwt", geomapping.App.ENV))
 	expiration := time.Duration(jwtConf["duration"].(int)) * time.Minute
 
 	return c.JSON(http.StatusOK, map[string]interface{}{

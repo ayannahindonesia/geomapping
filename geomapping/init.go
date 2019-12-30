@@ -1,8 +1,8 @@
-package asira
+package geomapping
 
 import (
 	"fmt"
-	"asira_geomapping/validator"
+	"geomapping/validator"
 	"log"
 	"os"
 	"strings"
@@ -28,7 +28,7 @@ type (
 	}
 )
 
-// Initiate asira instances
+// Initiate instances
 func init() {
 	var err error
 	App = &Application{}

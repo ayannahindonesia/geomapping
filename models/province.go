@@ -1,8 +1,10 @@
 package models
 
+import "github.com/ayannahindonesia/basemodel"
+
 type (
 	Province struct {
-		BaseModel
+		basemodel.BaseModel
 		Name string `json:"name" gorm:"column:name;type:varchar(255)"`
 	}
 )

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"asira_geomapping/models"
+	"geomapping/models"
 	"net/http"
 
 	guuid "github.com/google/uuid"

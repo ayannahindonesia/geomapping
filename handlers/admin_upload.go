@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"asira_geomapping/models"
 	"encoding/csv"
 	"fmt"
+	"geomapping/models"
 	"io"
 	"net/http"
 	"os"
@@ -13,6 +13,7 @@ import (
 	"github.com/labstack/echo"
 )
 
+// AdminUpload uploads csv sent by api
 func AdminUpload(c echo.Context) error {
 	defer c.Request().Body.Close()
 
@@ -77,38 +78,53 @@ func AdminUpload(c echo.Context) error {
 		}
 
 		//Kota
+		type FilterCity struct {
+			Name       string `json:"name"`
+			ProvinceID uint64 `json:"province_id"`
+		}
 		city := models.City{}
-		_, err = city.FilterSearchSingle(&Filter{
-			Name: record[6],
+		_, err = city.FilterSearchSingle(&FilterCity{
+			Name:       record[6],
+			ProvinceID: prov.ID,
 		})
 		if err != nil {
 			city.Name = record[6]
-			city.ProvinceID = int(prov.BaseModel.ID)
+			city.ProvinceID = int(prov.ID)
 			city.Type = record[5]
 			city.Create()
 		}
 
 		//Kecamatan
+		type FilterDistrict struct {
+			Name   string `json:"name"`
+			CityID uint64 `json:"city_id"`
+		}
 		district := models.District{}
-		_, err = district.FilterSearchSingle(&Filter{
-			Name: record[4],
+		_, err = district.FilterSearchSingle(&FilterDistrict{
+			Name:   record[4],
+			CityID: city.ID,
 		})
 		if err != nil {
 			district.Name = record[4]
-			district.CityID = int(city.BaseModel.ID)
+			district.CityID = int(city.ID)
 			district.Create()
 		}
 
 		//Kelurahan
+		type FilterVillage struct {
+			Name       string `json:"name"`
+			DistrictID uint64 `json:"district_id"`
+		}
 		village := models.Village{}
-		_, err = village.FilterSearchSingle(&Filter{
-			Name: record[2],
+		_, err = village.FilterSearchSingle(&FilterVillage{
+			Name:       record[2],
+			DistrictID: district.ID,
 		})
 		if err != nil {
 			village.Name = record[2]
 			village.ZipCode, _ = strconv.Atoi(record[1])
 			village.AreaCode = record[3]
-			village.DistrictID = int(district.BaseModel.ID)
+			village.DistrictID = int(district.ID)
 			village.Create()
 		}
 		i++

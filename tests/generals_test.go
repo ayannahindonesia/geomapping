@@ -1,9 +1,9 @@
 package tests
 
 import (
-	"asira_geomapping/asira"
-	"asira_geomapping/migration"
 	"fmt"
+	"geomapping/geomapping"
+	"geomapping/migration"
 	"net/http"
 	"os"
 
@@ -17,8 +17,8 @@ var (
 
 func init() {
 	// restrict test to development environment only.
-	if asira.App.ENV != "development" {
-		fmt.Printf("test aren't allowed in %s environment.", asira.App.ENV)
+	if geomapping.App.ENV != "development" {
+		fmt.Printf("test aren't allowed in %s environment.", geomapping.App.ENV)
 		os.Exit(1)
 	}
 }

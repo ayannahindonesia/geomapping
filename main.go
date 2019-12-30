@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"flag"
 	"fmt"
-	"asira_geomapping/asira"
-	"asira_geomapping/migration"
-	"asira_geomapping/router"
+	"geomapping/geomapping"
+	"geomapping/migration"
+	"geomapping/router"
 	"log"
 	"os"
 
@@ -19,7 +19,7 @@ var (
 )
 
 func main() {
-	defer asira.App.Close()
+	defer geomapping.App.Close()
 
 	flags.Usage = usage
 	flags.Parse(os.Args[1:])
@@ -33,7 +33,7 @@ func main() {
 		break
 	case "run":
 		e := router.NewRouter()
-		if asira.App.Config.GetBool("react_cors") {
+		if geomapping.App.Config.GetBool("react_cors") {
 			e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 				AllowOrigins: []string{"*"},
 				AllowMethods: []string{"*"},
@@ -67,7 +67,7 @@ func main() {
 			flags.Usage()
 		}
 
-		dbconf := asira.App.Config.GetStringMap(fmt.Sprintf("%s.database", asira.App.ENV))
+		dbconf := geomapping.App.Config.GetStringMap(fmt.Sprintf("%s.database", geomapping.App.ENV))
 		connectionString := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s password=%s", dbconf["host"].(string), dbconf["username"].(string), dbconf["table"].(string), dbconf["sslmode"].(string), dbconf["password"].(string))
 
 		db, err := sql.Open("postgres", connectionString)
@@ -88,11 +88,11 @@ func usage() {
 	usagestring := `
 to run the app :
 	[app_name] run
-	example : asira run
+	example : geomapping run
 
 to update db :
 	[app_name] migrate [goose_command]
-	example : asira migrate up
+	example : geomapping migrate up
 	goose command lists:
 		up                   Migrate the DB to the most recent version available
 		up-by-one            Migrate the DB up by 1
@@ -108,11 +108,11 @@ to update db :
 
 database seeding : (development environment only)
 	[app_name] seed
-	example : asira seed
+	example : geomapping seed
 
 database truncate : (development environment only)
 	[app_name] truncate [table(s)]
-	example : asira truncate all
+	example : geomapping truncate all
 	replace [table] with 'all' to truncate all tables
 	`
 

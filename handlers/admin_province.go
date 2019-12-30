@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"asira_geomapping/models"
 	"fmt"
+	"geomapping/models"
 	"net/http"
 	"strconv"
 

@@ -1,8 +1,10 @@
 package models
 
+import "github.com/ayannahindonesia/basemodel"
+
 type (
 	Client_config struct {
-		BaseModel
+		basemodel.BaseModel
 		Name   string `json:"name" gorm:"column:name"`
 		Key    string `json:"key" gorm:"column:key"`
 		Secret string `json:"secret" gorm:"column:secret"`
