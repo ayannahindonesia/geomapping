@@ -1,8 +1,10 @@
 package models
 
+import "github.com/ayannahindonesia/basemodel"
+
 type (
 	Village struct {
-		BaseModel
+		basemodel.BaseModel
 		Name       string `json:"name" gorm:"column:name;type:varchar(255)"`
 		DistrictID int    `json:"district_id" gorm:"column:district_id"`
 		ZipCode    int    `json:"zip_code" gorm:"column:zip_code"`

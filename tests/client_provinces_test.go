@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"asira_geomapping/router"
+	"geomapping/router"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -10,6 +10,7 @@ import (
 )
 
 func TestClientProvince(t *testing.T) {
+	RebuildData()
 	api := router.NewRouter()
 
 	server := httptest.NewServer(api)

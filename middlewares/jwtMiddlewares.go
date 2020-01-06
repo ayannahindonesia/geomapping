@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"fmt"
-	"asira_geomapping/asira"
+	"geomapping/geomapping"
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
@@ -11,7 +11,7 @@ import (
 )
 
 func SetClientJWTmiddlewares(g *echo.Group, role string) {
-	jwtConfig := asira.App.Config.GetStringMap(fmt.Sprintf("%s.jwt", asira.App.ENV))
+	jwtConfig := geomapping.App.Config.GetStringMap(fmt.Sprintf("%s.jwt", geomapping.App.ENV))
 
 	g.Use(middleware.JWTWithConfig(middleware.JWTConfig{
 		SigningMethod: "HS512",

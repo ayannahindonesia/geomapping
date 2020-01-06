@@ -1,8 +1,10 @@
 package models
 
+import "github.com/ayannahindonesia/basemodel"
+
 type (
 	City struct {
-		BaseModel
+		basemodel.BaseModel
 		Name       string `json:"name" gorm:"column:name;type:varchar(255)"`
 		ProvinceID int    `json:"province_id" gorm:"column:province_id"`
 		Type       string `json:"type" gorm:"column:type;type:varchar(255)" sql:"DEFAULT:'kota'"`

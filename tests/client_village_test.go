@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"asira_geomapping/router"
+	"geomapping/router"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -10,6 +10,7 @@ import (
 )
 
 func TestClientVillage(t *testing.T) {
+	RebuildData()
 	api := router.NewRouter()
 
 	server := httptest.NewServer(api)
@@ -32,7 +33,7 @@ func TestClientVillage(t *testing.T) {
 		req.WithHeader("Authorization", "Bearer "+admintoken)
 	})
 	// valid response of kelurahan
-	obj = auth.GET("/client/kecamatan/1/kelurahan").
+	obj = auth.GET("/client/provinsi/kota/kecamatan/1/kelurahan").
 		Expect().
 		Status(http.StatusOK).JSON().Object()
 

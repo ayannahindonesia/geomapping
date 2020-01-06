@@ -1,17 +1,17 @@
 package migration
 
 import (
-	"asira_geomapping/asira"
-	"asira_geomapping/models"
 	"fmt"
+	"geomapping/geomapping"
+	"geomapping/models"
 	"strings"
 )
 
 func Seed() {
-	seeder := asira.App.DB.Begin()
+	seeder := geomapping.App.DB.Begin()
 	defer seeder.Commit()
 
-	if asira.App.ENV == "development" {
+	if geomapping.App.ENV == "development" {
 		// seed province
 		province := []models.Province{
 			models.Province{
@@ -136,7 +136,7 @@ func Truncate(tableList []string) (err error) {
 
 		tables := strings.Join(tableList, ", ")
 		sqlQuery := fmt.Sprintf("TRUNCATE TABLE %s RESTART IDENTITY CASCADE", tables)
-		err = asira.App.DB.Exec(sqlQuery).Error
+		err = geomapping.App.DB.Exec(sqlQuery).Error
 		return err
 	}
 
