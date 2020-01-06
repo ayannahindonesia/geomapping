@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"asira_geomapping/models"
+	"geomapping/models"
 	"net/http"
 	"strconv"
 
 	"github.com/labstack/echo"
 )
 
+// ClientProvinces client province list
 func ClientProvinces(c echo.Context) error {
 	defer c.Request().Body.Close()
 
@@ -25,13 +26,14 @@ func ClientProvinces(c echo.Context) error {
 	})
 }
 
+// ClientProvinceDetails province details
 func ClientProvinceDetails(c echo.Context) error {
 	defer c.Request().Body.Close()
 
 	ProvinceID, _ := strconv.Atoi(c.Param("provinsi_id"))
 	provinces := models.Province{}
 
-	result, err := provinces.FindByID(ProvinceID)
+	result, err := provinces.FindbyID(ProvinceID)
 	if err != nil {
 		return returnInvalidResponse(http.StatusNotFound, err, "data tidak ditemukan")
 	}

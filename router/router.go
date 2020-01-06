@@ -1,8 +1,8 @@
 package router
 
 import (
-	"asira_geomapping/groups"
-	"asira_geomapping/handlers"
+	"geomapping/groups"
+	"geomapping/handlers"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

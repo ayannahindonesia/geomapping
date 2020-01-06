@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"asira_geomapping/asira"
 	"fmt"
+	"geomapping/geomapping"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -66,7 +66,7 @@ func returnInvalidResponse(httpcode int, details interface{}, message string) er
 
 // self explanation
 func createJwtToken(id string, role string) (string, error) {
-	jwtConf := asira.App.Config.GetStringMap(fmt.Sprintf("%s.jwt", asira.App.ENV))
+	jwtConf := geomapping.App.Config.GetStringMap(fmt.Sprintf("%s.jwt", geomapping.App.ENV))
 
 	claim := JWTclaims{
 		id,

@@ -1,8 +1,10 @@
 package models
 
+import "github.com/ayannahindonesia/basemodel"
+
 type (
 	District struct {
-		BaseModel
+		basemodel.BaseModel
 		Name   string `json:"name" gorm:"column:name;type:varchar(255)"`
 		CityID int    `json:"city_id" gorm:"column:city_id"`
 	}

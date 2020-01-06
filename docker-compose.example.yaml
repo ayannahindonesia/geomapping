@@ -1,18 +1,18 @@
 version: '3'
 
 services:
-  asira_geomapping:
+  geomapping:
     build: .
     ports:
       - 8002:8002
-    image: asira_geomapping:development
+    image: geomapping:development
     volumes:
-      - ./:/go/src/asira_geomapping
+      - ./:/go/src/geomapping
     hostname: localhost
     environment:
-      - APPNAME=asira_geomapping
+      - APPNAME=geomapping
       - ENV=dev
-    container_name: asira_geomapping
+    container_name: geomapping
   postgres_db:
     image: postgres
     restart: always

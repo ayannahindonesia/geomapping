@@ -1,8 +1,8 @@
 package models
 
 import (
-	"asira_geomapping/asira"
 	"fmt"
+	"geomapping/geomapping"
 	"math"
 	"reflect"
 	"strings"
@@ -38,7 +38,7 @@ type (
 
 // helper for inserting data using gorm.DB functions
 func WithinTransaction(fn DBFunc) (err error) {
-	tx := asira.App.DB.Begin()
+	tx := geomapping.App.DB.Begin()
 	defer tx.Commit()
 	err = fn(tx)
 
@@ -48,7 +48,7 @@ func WithinTransaction(fn DBFunc) (err error) {
 // inserts a row into db.
 func Create(i interface{}) error {
 	return WithinTransaction(func(tx *gorm.DB) (err error) {
-		if !asira.App.DB.NewRecord(i) {
+		if !geomapping.App.DB.NewRecord(i) {
 			return err
 		}
 		if err = tx.Create(i).Error; err != nil {
@@ -63,7 +63,7 @@ func Create(i interface{}) error {
 func Save(i interface{}) error {
 	return WithinTransaction(func(tx *gorm.DB) (err error) {
 		// check new object
-		if asira.App.DB.NewRecord(i) {
+		if geomapping.App.DB.NewRecord(i) {
 			return err
 		}
 		if err = tx.Save(i).Error; err != nil {
@@ -98,7 +98,7 @@ func FindbyID(i interface{}, id int) (err error) {
 }
 
 func FilterSearchSingle(i interface{}, filter interface{}) (err error) {
-	db := asira.App.DB
+	db := geomapping.App.DB
 
 	// filtering
 	refFilter := reflect.ValueOf(filter).Elem()
@@ -127,7 +127,7 @@ func PagedFilterSearch(i interface{}, page int, rows int, orderby string, sort s
 		rows = 25 // default row is 25 per page
 	}
 
-	db := asira.App.DB
+	db := geomapping.App.DB
 
 	// filtering
 	refFilter := reflect.ValueOf(filter).Elem()
@@ -193,7 +193,7 @@ func PagedFilterSearch(i interface{}, page int, rows int, orderby string, sort s
 
 func GetAll(i interface{}, filter interface{}) (data interface{}, err error) {
 
-	db := asira.App.DB
+	db := geomapping.App.DB
 
 	// filtering
 	refFilter := reflect.ValueOf(filter).Elem()

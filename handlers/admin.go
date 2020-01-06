@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"asira_geomapping/asira"
+	"geomapping/geomapping"
 	"net/http"
 
 	"github.com/labstack/echo"
@@ -19,10 +19,10 @@ func AsiraAppInfo(c echo.Context) error {
 
 	var show AppInfo
 
-	show.AppName = asira.App.Name
-	show.Version = asira.App.Version
-	show.ENV = asira.App.ENV
-	show.Config = asira.App.Config.GetStringMap(asira.App.ENV)
+	show.AppName = geomapping.App.Name
+	show.Version = geomapping.App.Version
+	show.ENV = geomapping.App.ENV
+	show.Config = geomapping.App.Config.GetStringMap(geomapping.App.ENV)
 
 	return c.JSON(http.StatusOK, show)
 }
