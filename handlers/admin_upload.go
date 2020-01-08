@@ -69,7 +69,7 @@ func AdminUpload(c echo.Context) error {
 
 		//provinsi
 		prov := models.Province{}
-		_, err = prov.FilterSearchSingle(&Filter{
+		err = prov.SingleFindFilter(&Filter{
 			Name: record[7],
 		})
 		if err != nil {
@@ -83,7 +83,7 @@ func AdminUpload(c echo.Context) error {
 			ProvinceID uint64 `json:"province_id"`
 		}
 		city := models.City{}
-		_, err = city.FilterSearchSingle(&FilterCity{
+		err = city.SingleFindFilter(&FilterCity{
 			Name:       record[6],
 			ProvinceID: prov.ID,
 		})
@@ -100,7 +100,7 @@ func AdminUpload(c echo.Context) error {
 			CityID uint64 `json:"city_id"`
 		}
 		district := models.District{}
-		_, err = district.FilterSearchSingle(&FilterDistrict{
+		err = district.SingleFindFilter(&FilterDistrict{
 			Name:   record[4],
 			CityID: city.ID,
 		})
@@ -116,7 +116,7 @@ func AdminUpload(c echo.Context) error {
 			DistrictID uint64 `json:"district_id"`
 		}
 		village := models.Village{}
-		_, err = village.FilterSearchSingle(&FilterVillage{
+		err = village.SingleFindFilter(&FilterVillage{
 			Name:       record[2],
 			DistrictID: district.ID,
 		})

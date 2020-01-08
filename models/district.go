@@ -2,49 +2,50 @@ package models
 
 import "github.com/ayannahindonesia/basemodel"
 
-type (
-	District struct {
-		basemodel.BaseModel
-		Name   string `json:"name" gorm:"column:name;type:varchar(255)"`
-		CityID int    `json:"city_id" gorm:"column:city_id"`
-	}
-)
-
-func (p *District) Create() (*District, error) {
-	err := Create(&p)
-	return p, err
+// District kecamatan main type
+type District struct {
+	basemodel.BaseModel
+	Name   string `json:"name" gorm:"column:name;type:varchar(255)"`
+	CityID int    `json:"city_id" gorm:"column:city_id"`
 }
 
-func (p *District) Save() (*District, error) {
-	err := Save(&p)
-	return p, err
+// Create func
+func (model *District) Create() error {
+	return basemodel.Create(&model)
 }
 
-func (p *District) Delete() (*District, error) {
-	err := Delete(&p)
-	return p, err
+// Save func
+func (model *District) Save() error {
+	return basemodel.Save(&model)
 }
 
-func (p *District) FindbyID(id int) (*District, error) {
-	err := FindbyID(&p, id)
-	return p, err
+// Delete func
+func (model *District) Delete() error {
+	return basemodel.Delete(&model)
 }
 
-func (p *District) PagedFilterSearch(page int, rows int, orderby string, sort string, filter interface{}) (result PagedSearchResult, err error) {
-	district := []District{}
-	result, err = PagedFilterSearch(&district, page, rows, orderby, sort, filter)
+// FindbyID func
+func (model *District) FindbyID(id uint64) error {
+	return basemodel.FindbyID(&model, id)
+}
+
+// PagedFindFilter func
+func (model *District) PagedFindFilter(page int, rows int, orderby []string, sort []string, filter interface{}) (result basemodel.PagedFindResult, err error) {
+	m := []District{}
+	result, err = basemodel.PagedFindFilter(&m, page, rows, orderby, sort, filter)
 
 	return result, err
 }
 
-func (p *District) GetAll(filter interface{}) (result interface{}, err error) {
-	dist := []District{}
-	result, err = GetAll(&dist, filter)
+// FindFilter func
+func (model *District) FindFilter(order []string, sort []string, limit int, offset int, filter interface{}) (result interface{}, err error) {
+	m := []District{}
+	result, err = basemodel.FindFilter(&m, order, sort, limit, offset, filter)
 
 	return result, err
 }
 
-func (p *District) FilterSearchSingle(filter interface{}) (*District, error) {
-	err := FilterSearchSingle(&p, filter)
-	return p, err
+// SingleFindFilter func
+func (model *District) SingleFindFilter(filter interface{}) error {
+	return basemodel.SingleFindFilter(&model, filter)
 }

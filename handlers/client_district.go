@@ -18,7 +18,7 @@ func ClientDistricts(c echo.Context) error {
 		CityID int `json:"city_id"`
 	}
 
-	result, err := district.GetAll(&Filter{
+	result, err := district.FindFilter([]string{}, []string{}, 0, 0, &Filter{
 		CityID: CityID,
 	})
 	if err != nil {
@@ -34,13 +34,13 @@ func ClientDistricts(c echo.Context) error {
 func ClientDistrictDetails(c echo.Context) error {
 	defer c.Request().Body.Close()
 
-	DistrictID, _ := strconv.Atoi(c.Param("kecamatan_id"))
+	DistrictID, _ := strconv.ParseUint(c.Param("kecamatan_id"), 10, 64)
 	district := models.District{}
 
-	result, err := district.FindbyID(DistrictID)
+	err := district.FindbyID(DistrictID)
 	if err != nil {
 		return returnInvalidResponse(http.StatusNotFound, err, "data tidak ditemukan")
 	}
 
-	return c.JSON(http.StatusOK, result)
+	return c.JSON(http.StatusOK, district)
 }

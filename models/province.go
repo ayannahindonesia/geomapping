@@ -2,48 +2,49 @@ package models
 
 import "github.com/ayannahindonesia/basemodel"
 
-type (
-	Province struct {
-		basemodel.BaseModel
-		Name string `json:"name" gorm:"column:name;type:varchar(255)"`
-	}
-)
-
-func (p *Province) Create() (*Province, error) {
-	err := Create(&p)
-	return p, err
+// Province provinsi main type
+type Province struct {
+	basemodel.BaseModel
+	Name string `json:"name" gorm:"column:name;type:varchar(255)"`
 }
 
-func (p *Province) Save() (*Province, error) {
-	err := Save(&p)
-	return p, err
+// Create func
+func (model *Province) Create() error {
+	return basemodel.Create(&model)
 }
 
-func (p *Province) Delete() (*Province, error) {
-	err := Delete(&p)
-	return p, err
+// Save func
+func (model *Province) Save() error {
+	return basemodel.Save(&model)
 }
 
-func (p *Province) FindbyID(id int) (*Province, error) {
-	err := FindbyID(&p, id)
-	return p, err
+// Delete func
+func (model *Province) Delete() error {
+	return basemodel.Delete(&model)
 }
 
-func (p *Province) PagedFilterSearch(page int, rows int, orderby string, sort string, filter interface{}) (result PagedSearchResult, err error) {
-	province := []Province{}
-	result, err = PagedFilterSearch(&province, page, rows, orderby, sort, filter)
+// FindbyID func
+func (model *Province) FindbyID(id uint64) error {
+	return basemodel.FindbyID(&model, id)
+}
+
+// PagedFindFilter func
+func (model *Province) PagedFindFilter(page int, rows int, orderby []string, sort []string, filter interface{}) (result basemodel.PagedFindResult, err error) {
+	m := []Province{}
+	result, err = basemodel.PagedFindFilter(&m, page, rows, orderby, sort, filter)
 
 	return result, err
 }
 
-func (p *Province) GetAll(filter interface{}) (result interface{}, err error) {
-	province := []Province{}
-	result, err = GetAll(&province, filter)
+// FindFilter func
+func (model *Province) FindFilter(order []string, sort []string, limit int, offset int, filter interface{}) (result interface{}, err error) {
+	m := []Province{}
+	result, err = basemodel.FindFilter(&m, order, sort, limit, offset, filter)
 
 	return result, err
 }
 
-func (p *Province) FilterSearchSingle(filter interface{}) (*Province, error) {
-	err := FilterSearchSingle(&p, filter)
-	return p, err
+// SingleFindFilter func
+func (model *Province) SingleFindFilter(filter interface{}) error {
+	return basemodel.SingleFindFilter(&model, filter)
 }

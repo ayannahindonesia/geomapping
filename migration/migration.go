@@ -101,14 +101,14 @@ func Seed() {
 			kel.Create()
 		}
 
-		client := []models.Client_config{
-			models.Client_config{
+		client := []models.ClientConfig{
+			models.ClientConfig{
 				Name:   "admin",
 				Key:    "admin",
 				Role:   "admin",
 				Secret: "adminkey",
 			},
-			models.Client_config{
+			models.ClientConfig{
 				Name:   "client",
 				Key:    "client",
 				Role:   "client",

@@ -2,42 +2,52 @@ package models
 
 import "github.com/ayannahindonesia/basemodel"
 
-type (
-	Client_config struct {
-		basemodel.BaseModel
-		Name   string `json:"name" gorm:"column:name"`
-		Key    string `json:"key" gorm:"column:key"`
-		Secret string `json:"secret" gorm:"column:secret"`
-		Role   string `json:"role" gorm:"column:role"`
-	}
-)
-
-// gorm callback hook
-func (i *Client_config) BeforeCreate() (err error) {
-	return nil
+// ClientConfig main type
+type ClientConfig struct {
+	basemodel.BaseModel
+	Name   string `json:"name" gorm:"column:name"`
+	Key    string `json:"key" gorm:"column:key"`
+	Secret string `json:"secret" gorm:"column:secret"`
+	Role   string `json:"role" gorm:"column:role"`
 }
 
-func (i *Client_config) Create() (*Client_config, error) {
-	err := Create(&i)
-	return i, err
+// Create func
+func (model *ClientConfig) Create() error {
+	return basemodel.Create(&model)
 }
 
-// gorm callback hook
-func (i *Client_config) BeforeSave() (err error) {
-	return nil
+// Save func
+func (model *ClientConfig) Save() error {
+	return basemodel.Save(&model)
 }
 
-func (i *Client_config) Save() (*Client_config, error) {
-	err := Save(&i)
-	return i, err
+// Delete func
+func (model *ClientConfig) Delete() error {
+	return basemodel.Delete(&model)
 }
 
-func (l *Client_config) FilterSearchSingle(filter interface{}) (*Client_config, error) {
-	err := FilterSearchSingle(&l, filter)
-	return l, err
+// FindbyID func
+func (model *ClientConfig) FindbyID(id uint64) error {
+	return basemodel.FindbyID(&model, id)
 }
 
-func (i *Client_config) Delete() (*Client_config, error) {
-	err := Delete(&i)
-	return i, err
+// PagedFindFilter func
+func (model *ClientConfig) PagedFindFilter(page int, rows int, orderby []string, sort []string, filter interface{}) (result basemodel.PagedFindResult, err error) {
+	m := []ClientConfig{}
+	result, err = basemodel.PagedFindFilter(&m, page, rows, orderby, sort, filter)
+
+	return result, err
+}
+
+// FindFilter func
+func (model *ClientConfig) FindFilter(order []string, sort []string, limit int, offset int, filter interface{}) (result interface{}, err error) {
+	m := []ClientConfig{}
+	result, err = basemodel.FindFilter(&m, order, sort, limit, offset, filter)
+
+	return result, err
+}
+
+// SingleFindFilter func
+func (model *ClientConfig) SingleFindFilter(filter interface{}) error {
+	return basemodel.SingleFindFilter(&model, filter)
 }

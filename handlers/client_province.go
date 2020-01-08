@@ -15,7 +15,7 @@ func ClientProvinces(c echo.Context) error {
 	provinces := models.Province{}
 
 	var filter struct{}
-	result, err := provinces.GetAll(&filter)
+	result, err := provinces.FindFilter([]string{}, []string{}, 0, 0, &filter)
 	if err != nil {
 		return returnInvalidResponse(http.StatusNotFound, err, "data tidak ditemukan")
 	}
@@ -30,13 +30,13 @@ func ClientProvinces(c echo.Context) error {
 func ClientProvinceDetails(c echo.Context) error {
 	defer c.Request().Body.Close()
 
-	ProvinceID, _ := strconv.Atoi(c.Param("provinsi_id"))
+	ProvinceID, _ := strconv.ParseUint(c.Param("provinsi_id"), 10, 64)
 	provinces := models.Province{}
 
-	result, err := provinces.FindbyID(ProvinceID)
+	err := provinces.FindbyID(ProvinceID)
 	if err != nil {
 		return returnInvalidResponse(http.StatusNotFound, err, "data tidak ditemukan")
 	}
 
-	return c.JSON(http.StatusOK, result)
+	return c.JSON(http.StatusOK, provinces)
 }

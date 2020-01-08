@@ -4,8 +4,9 @@
 CREATE TABLE "provinces" (
     "id" bigserial,
     "name" text,
-    "created_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
-    "updated_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" timestamptz,
     PRIMARY KEY ("id")
 ) WITH (OIDS = FALSE);
 
@@ -14,8 +15,9 @@ CREATE TABLE "cities" (
     "province_id" bigserial,
     "name" text,
     "type" text DEFAULT ('kota'),
-    "created_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
-    "updated_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" timestamptz,
     FOREIGN KEY ("province_id") REFERENCES provinces(id),
     PRIMARY KEY ("id")
 ) WITH (OIDS = FALSE);
@@ -24,8 +26,9 @@ CREATE TABLE "districts" (
     "id" bigserial,
     "city_id" bigserial,
     "name" text,
-    "created_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
-    "updated_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" timestamptz,
     FOREIGN KEY ("city_id") REFERENCES cities(id),
     PRIMARY KEY ("id")
 ) WITH (OIDS = FALSE);
@@ -36,8 +39,9 @@ CREATE TABLE "villages" (
     "name" text,
     "zip_code" int,
     "area_code" varchar(255),
-    "created_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
-    "updated_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" timestamptz,
     FOREIGN KEY ("district_id") REFERENCES districts(id),
     PRIMARY KEY ("id")
 ) WITH (OIDS = FALSE);
@@ -48,8 +52,9 @@ CREATE TABLE "client_configs" (
     "key" varchar(255) NOT NULL,
     "secret" varchar(255) NOT NULL,
     "role" varchar(255) NOT NULL,
-    "created_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
-    "updated_time" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamptz DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" timestamptz,
     PRIMARY KEY ("id")
 ) WITH (OIDS = FALSE);
 -- +goose Down

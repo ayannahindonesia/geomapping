@@ -12,7 +12,7 @@ import (
 func CreateClientConfig(c echo.Context) error {
 	defer c.Request().Body.Close()
 
-	clientC := models.Client_config{}
+	clientC := models.ClientConfig{}
 
 	payloadRules := govalidator.MapData{
 		"name": []string{"required"},
@@ -26,10 +26,10 @@ func CreateClientConfig(c echo.Context) error {
 	}
 
 	clientC.Secret = guuid.New().String()
-	newConfig, err := clientC.Create()
+	err := clientC.Create()
 	if err != nil {
 		return returnInvalidResponse(http.StatusInternalServerError, err, "Gagal membuat Client Config")
 	}
 
-	return c.JSON(http.StatusCreated, newConfig)
+	return c.JSON(http.StatusCreated, clientC)
 }

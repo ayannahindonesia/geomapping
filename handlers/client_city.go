@@ -17,7 +17,7 @@ func ClientCities(c echo.Context) error {
 	type Filter struct {
 		ProvinceID int `json:"province_id"`
 	}
-	result, err := cities.GetAll(&Filter{
+	result, err := cities.FindFilter([]string{}, []string{}, 0, 0, &Filter{
 		ProvinceID: ProvinceID,
 	})
 	if err != nil {
@@ -33,13 +33,13 @@ func ClientCities(c echo.Context) error {
 func ClientCityDetails(c echo.Context) error {
 	defer c.Request().Body.Close()
 
-	CityID, _ := strconv.Atoi(c.Param("kota_id"))
+	CityID, _ := strconv.ParseUint(c.Param("kota_id"), 10, 64)
 	cities := models.City{}
 
-	result, err := cities.FindbyID(CityID)
+	err := cities.FindbyID(CityID)
 	if err != nil {
 		return returnInvalidResponse(http.StatusNotFound, err, "pencarian tidak ditemukan")
 	}
 
-	return c.JSON(http.StatusOK, result)
+	return c.JSON(http.StatusOK, cities)
 }
