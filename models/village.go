@@ -2,51 +2,52 @@ package models
 
 import "github.com/ayannahindonesia/basemodel"
 
-type (
-	Village struct {
-		basemodel.BaseModel
-		Name       string `json:"name" gorm:"column:name;type:varchar(255)"`
-		DistrictID int    `json:"district_id" gorm:"column:district_id"`
-		ZipCode    int    `json:"zip_code" gorm:"column:zip_code"`
-		AreaCode   string `json:"area_code" gorm:"column:area_code;type:varchar(255)"`
-	}
-)
-
-func (p *Village) Create() (*Village, error) {
-	err := Create(&p)
-	return p, err
+// Village kelurahan main type
+type Village struct {
+	basemodel.BaseModel
+	Name       string `json:"name" gorm:"column:name;type:varchar(255)"`
+	DistrictID int    `json:"district_id" gorm:"column:district_id"`
+	ZipCode    int    `json:"zip_code" gorm:"column:zip_code"`
+	AreaCode   string `json:"area_code" gorm:"column:area_code;type:varchar(255)"`
 }
 
-func (p *Village) Save() (*Village, error) {
-	err := Save(&p)
-	return p, err
+// Create func
+func (model *Village) Create() error {
+	return basemodel.Create(&model)
 }
 
-func (p *Village) Delete() (*Village, error) {
-	err := Delete(&p)
-	return p, err
+// Save func
+func (model *Village) Save() error {
+	return basemodel.Save(&model)
 }
 
-func (p *Village) FindbyID(id int) (*Village, error) {
-	err := FindbyID(&p, id)
-	return p, err
+// Delete func
+func (model *Village) Delete() error {
+	return basemodel.Delete(&model)
 }
 
-func (p *Village) PagedFilterSearch(page int, rows int, orderby string, sort string, filter interface{}) (result PagedSearchResult, err error) {
-	kelurahan := []Village{}
-	result, err = PagedFilterSearch(&kelurahan, page, rows, orderby, sort, filter)
+// FindbyID func
+func (model *Village) FindbyID(id uint64) error {
+	return basemodel.FindbyID(&model, id)
+}
+
+// PagedFindFilter func
+func (model *Village) PagedFindFilter(page int, rows int, orderby []string, sort []string, filter interface{}) (result basemodel.PagedFindResult, err error) {
+	m := []Village{}
+	result, err = basemodel.PagedFindFilter(&m, page, rows, orderby, sort, filter)
 
 	return result, err
 }
 
-func (p *Village) GetAll(filter interface{}) (result interface{}, err error) {
-	vill := []Village{}
-	result, err = GetAll(&vill, filter)
+// FindFilter func
+func (model *Village) FindFilter(order []string, sort []string, limit int, offset int, filter interface{}) (result interface{}, err error) {
+	m := []Village{}
+	result, err = basemodel.FindFilter(&m, order, sort, limit, offset, filter)
 
 	return result, err
 }
 
-func (p *Village) FilterSearchSingle(filter interface{}) (*Village, error) {
-	err := FilterSearchSingle(&p, filter)
-	return p, err
+// SingleFindFilter func
+func (model *Village) SingleFindFilter(filter interface{}) error {
+	return basemodel.SingleFindFilter(&model, filter)
 }

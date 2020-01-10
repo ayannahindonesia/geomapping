@@ -26,8 +26,8 @@ func ClientLogin(c echo.Context) error {
 		Secret string `json:"secret"`
 	}
 
-	clientModel := models.Client_config{}
-	clientData, err := clientModel.FilterSearchSingle(&Login{
+	clientModel := models.ClientConfig{}
+	err = clientModel.SingleFindFilter(&Login{
 		Key:    auth[0],
 		Secret: auth[1],
 	})
@@ -36,7 +36,7 @@ func ClientLogin(c echo.Context) error {
 		return returnInvalidResponse(http.StatusUnauthorized, "", "Credentials tidak ditemukan")
 	}
 
-	token, err := createJwtToken(clientData.Name, clientData.Role)
+	token, err := createJwtToken(clientModel.Name, clientModel.Role)
 	if err != nil {
 		return returnInvalidResponse(http.StatusInternalServerError, "", fmt.Sprint(err))
 	}
